@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherIQ - AI Prediction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Rain Container -->
+    <div class="rain-container" id="rainContainer"></div>
+
+    <!-- Animated Background Elements -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Main Weather App -->
+    <div class="main-app">
+        <div class="weather-card">
+            <!-- Header with Animation -->
+            <div class="card-header">
+                <h1 class="app-title">⛅ WeatherIQ</h1>
+                <p class="app-subtitle">AI-Powered Weather Intelligence</p>
+            </div>
+
+            <!-- Input Section -->
+            <section class="input-section">
+                <h2 class="section-title">Enter Weather Conditions</h2>
+                <form id="weatherForm" class="input-grid">
+                    <div class="input-wrapper">
+                        <label for="temp">Temperature</label>
+                        <div class="input-group">
+                            <input type="number" id="temp" name="temp" value="25" required>
+                            <span class="unit-badge">°C</span>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="hum">Humidity</label>
+                        <div class="input-group">
+                            <input type="number" id="hum" name="hum" value="60" required>
+                            <span class="unit-badge">%</span>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="wind">Wind Speed</label>
+                        <div class="input-group">
+                            <input type="number" id="wind" name="wind" value="10" required>
+                            <span class="unit-badge">km/h</span>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="press">Pressure</label>
+                        <div class="input-group">
+                            <input type="number" id="press" name="press" value="1013" required>
+                            <span class="unit-badge">hPa</span>
+                        </div>
+                    </div>
+
+                    <button type="button" class="predict-btn" onclick="getPrediction()" id="predictBtn">
+                        <span class="btn-text">Get Prediction</span>
+                        <span class="btn-icon">→</span>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="loading-spinner hidden">
+                <div class="spinner"></div>
+                <p>Analyzing weather patterns...</p>
+            </div>
+
+            <!-- Results Section -->
+            <section id="resultSection" class="result-section hidden">
+                <div class="results-grid">
+                    <div class="result-card rain-card">
+                        <div class="result-icon">💧</div>
+                        <div class="result-value" id="rain_probability">0.0</div>
+                        <div class="result-unit">%</div>
+                        <div class="result-label">Rain Probability</div>
+                        <div class="result-description" id="rainStatus">Clear skies</div>
+                    </div>
+                    <div class="result-card temp-card">
+                        <div class="result-icon">🌡️</div>
+                        <div class="result-value" id="predicted_temp">0.0</div>
+                        <div class="result-unit">°C</div>
+                        <div class="result-label">Predicted Temp</div>
+                        <div class="result-description" id="tempStatus">Mild</div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-section">
+                    <div class="progress-label">
+                        <span>Rain Probability</span>
+                        <span class="weather-emoji" id="weatherEmoji">☀️</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="rainFill"></div>
+                    </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="additional-info">
+                    <div class="info-item">
+                        <span class="info-label">Input Temperature</span>
+                        <span class="info-value" id="inputTemp">25°C</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Input Humidity</span>
+                        <span class="info-value" id="inputHumidity">60%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Input Wind Speed</span>
+                        <span class="info-value" id="inputWind">10 km/h</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Input Pressure</span>
+                        <span class="info-value" id="inputPressure">1013 hPa</span>
+                    </div>
+                </div>
+
+                <button type="button" class="reset-btn" onclick="resetForm()">← Try Another</button>
+            </section>
+
+            <!-- Error Section -->
+            <section id="errorSection" class="error-section hidden">
+                <div class="error-icon">⚠️</div>
+                <div class="error-message">Something went wrong</div>
+                <div class="error-details" id="errorText">Please try again</div>
+                <button type="button" class="reset-btn" onclick="resetForm()">← Go Back</button>
+            </section>
+        </div>
+    </div>
+
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>
