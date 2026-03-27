@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intelligent-weather-api
+  labels:
+    app: intelligent-weather-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: intelligent-weather-api
+  template:
+    metadata:
+      labels:
+        app: intelligent-weather-api
+    spec:
+      containers:
+      - name: backend
+        image: intelligent-weather-api:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "1"
